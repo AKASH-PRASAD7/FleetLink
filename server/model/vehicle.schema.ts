@@ -9,7 +9,7 @@ export interface IVehicle extends Document {
 
 const VehicleSchema: Schema<IVehicle> = new Schema(
   {
-    id: { type: String, required: true, unique: true },
+    id: { type: Schema.Types.ObjectId, required: true, unique: true },
     name: { type: String, required: true },
     capacityKg: { type: Number, required: true, min: 1 },
     tyres: { type: Number, required: true, min: 1 },
