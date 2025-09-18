@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IVehicle extends Document {
-  id: string;
+  id: Schema.Types.ObjectId;
   name: string;
   capacityKg: number;
   tyres: number;
