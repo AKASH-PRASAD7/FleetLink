@@ -40,7 +40,7 @@ FleetLink is a modern, full-stack logistics management platform designed to stre
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/AKASH-PRASAD7/FleetLink.git
     cd fleetlink
     ```
 
