@@ -47,7 +47,6 @@ export const insertVehicleSchema = vehicleSchema
 
 export const insertBookingSchema = bookingSchema.omit({
   _id: true,
-  id: true,
   endTime: true,
 });
 
