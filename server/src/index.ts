@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "../api/routes";
+import { Routes } from "../api/routes";
 import { setupVite, serveStatic, log } from "../vite";
 import { connectDB } from "server/db/mongo";
 
@@ -23,6 +23,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   }
   next();
 });
+
+app.use("/api/v1", Routes);
 
 app.listen(PORT, async () => {
   await connectDB(MONGODB_URI!);
