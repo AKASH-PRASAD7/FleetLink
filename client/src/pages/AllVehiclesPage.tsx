@@ -8,11 +8,15 @@ export default function AllVehiclesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
+import { apiUrl } from "@/lib/api";
+
+// ... (rest of the file)
+
   useEffect(() => {
     const fetchVehicles = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:8000/api/v1/vehicles");
+        const response = await fetch(`${apiUrl}/api/v1/vehicles`);
         if (!response.ok) {
           throw new Error("Failed to fetch vehicles");
         }

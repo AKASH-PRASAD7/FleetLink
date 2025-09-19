@@ -2,17 +2,20 @@ import { useState, useEffect } from "react";
 import { Booking } from "@shared/schema";
 import BookingList from "@/components/BookingList";
 import { useToast } from "@/hooks/use-toast";
+import { apiUrl } from "@/lib/api";
 
 export default function AllBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
+  // ... (rest of the file)
+
   useEffect(() => {
     const fetchBookings = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:8000/api/v1/bookings");
+        const response = await fetch(`${apiUrl}/api/v1/bookings`);
         if (!response.ok) {
           throw new Error("Failed to fetch bookings");
         }
@@ -34,7 +37,7 @@ export default function AllBookingsPage() {
 
   const handleCancelBooking = async (bookingId: string) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/bookings/${bookingId}`, {
+      const response = await fetch(`${apiUrl}/api/v1/bookings/${bookingId}`, {
         method: "DELETE",
       });
 
@@ -68,7 +71,11 @@ export default function AllBookingsPage() {
           Browse the complete list of bookings.
         </p>
       </div>
-      <BookingList bookings={bookings} isLoading={isLoading} onCancelBooking={handleCancelBooking} />
+      <BookingList
+        bookings={bookings}
+        isLoading={isLoading}
+        onCancelBooking={handleCancelBooking}
+      />
     </div>
   );
 }
