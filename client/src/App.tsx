@@ -10,6 +10,9 @@ import AddVehiclePage from "@/pages/AddVehiclePage";
 import SearchPage from "@/pages/SearchPage";
 import NotFound from "@/pages/not-found";
 
+import AllVehiclesPage from "@/pages/AllVehiclesPage";
+import AllBookingsPage from "@/pages/AllBookingsPage";
+
 function Router() {
   return (
     <AppLayout>
@@ -17,6 +20,8 @@ function Router() {
         <Route path="/" component={HomePage} />
         <Route path="/add-vehicle" component={AddVehiclePage} />
         <Route path="/search" component={SearchPage} />
+        <Route path="/all-vehicles" component={AllVehiclesPage} />
+        <Route path="/all-bookings" component={AllBookingsPage} />
         <Route component={NotFound} />
       </Switch>
     </AppLayout>

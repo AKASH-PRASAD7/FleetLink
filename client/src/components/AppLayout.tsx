@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Truck, Plus, Search, Menu, Moon, Sun } from "lucide-react";
+import { Truck, Plus, Search, Menu, Moon, Sun, Book } from "lucide-react";
 import { useTheme } from "../hooks/use-theme";
 
 interface AppLayoutProps {
@@ -18,6 +18,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const navigation = [
     { name: "Add Vehicle", href: "/add-vehicle", icon: Plus },
     { name: "Search & Book", href: "/search", icon: Search },
+    { name: "All Vehicles", href: "/all-vehicles", icon: Truck },
+    { name: "All Bookings", href: "/all-bookings", icon: Book },
   ];
 
   return (

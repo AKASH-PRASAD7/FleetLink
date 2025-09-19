@@ -178,4 +178,24 @@ app.post("/bookings", async (req, res) => {
   }
 });
 
+app.get("/vehicles", async (req, res) => {
+  try {
+    const vehicles = await Vehicle.find();
+    res.status(200).json(vehicles);
+  } catch (error) {
+    console.error("Error fetching vehicles:", error);
+    res.status(500).json({ message: "Failed to fetch vehicles" });
+  }
+});
+
+app.get("/bookings", async (req, res) => {
+  try {
+    const bookings = await Booking.find().populate("vehicleId");
+    res.status(200).json(bookings);
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({ message: "Failed to fetch bookings" });
+  }
+});
+
 export default app;
