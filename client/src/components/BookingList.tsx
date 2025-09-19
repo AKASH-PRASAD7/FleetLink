@@ -9,12 +9,15 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+import { Button } from "./ui/button";
+
 interface BookingListProps {
   bookings: Booking[];
   isLoading: boolean;
+  onCancelBooking?: (bookingId: string) => void;
 }
 
-export default function BookingList({ bookings, isLoading }: BookingListProps) {
+export default function BookingList({ bookings, isLoading, onCancelBooking }: BookingListProps) {
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -38,6 +41,7 @@ export default function BookingList({ bookings, isLoading }: BookingListProps) {
               <TableHead>To</TableHead>
               <TableHead>Start Time</TableHead>
               <TableHead>End Time</TableHead>
+              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -52,6 +56,17 @@ export default function BookingList({ bookings, isLoading }: BookingListProps) {
                 </TableCell>
                 <TableCell>
                   {new Date(booking.endTime).toLocaleString()}
+                </TableCell>
+                <TableCell>
+                  {onCancelBooking && (
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => onCancelBooking(booking._id!)}
+                    >
+                      Cancel
+                    </Button>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

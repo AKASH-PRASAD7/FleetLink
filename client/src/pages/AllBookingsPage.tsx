@@ -32,6 +32,34 @@ export default function AllBookingsPage() {
     fetchBookings();
   }, [toast]);
 
+  const handleCancelBooking = async (bookingId: string) => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/v1/bookings/${bookingId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to cancel booking");
+      }
+
+      setBookings((prevBookings) =>
+        prevBookings.filter((booking) => booking._id !== bookingId)
+      );
+
+      toast({
+        title: "Success",
+        description: "Booking canceled successfully.",
+      });
+    } catch (error) {
+      console.error("Error canceling booking:", error);
+      toast({
+        title: "Error",
+        description: "Failed to cancel booking. Please try again later.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="max-w-6xl h-screen mx-auto space-y-4">
       <div>
@@ -40,7 +68,7 @@ export default function AllBookingsPage() {
           Browse the complete list of bookings.
         </p>
       </div>
-      <BookingList bookings={bookings} isLoading={isLoading} />
+      <BookingList bookings={bookings} isLoading={isLoading} onCancelBooking={handleCancelBooking} />
     </div>
   );
 }

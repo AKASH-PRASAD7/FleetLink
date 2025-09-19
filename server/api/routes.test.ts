@@ -121,4 +121,14 @@ describe("API Routes", () => {
       expect(res.body).toEqual(populatedBookings);
     });
   });
+  describe("DELETE /api/v1/bookings/:id", () => {
+    it("should delete a booking", async () => {
+      const bookingId = "1";
+      (Booking.findByIdAndDelete as jest.Mock).mockResolvedValue({ _id: bookingId });
+
+      const res = await request(app).delete(`/api/v1/bookings/${bookingId}`);
+
+      expect(res.status).toBe(204);
+    });
+  });
 });

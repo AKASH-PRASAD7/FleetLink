@@ -198,4 +198,18 @@ app.get("/bookings", async (req, res) => {
   }
 });
 
+app.delete("/bookings/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedBooking = await Booking.findByIdAndDelete(id);
+    if (!deletedBooking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    res.status(500).json({ message: "Failed to delete booking" });
+  }
+});
+
 export default app;
