@@ -13,8 +13,8 @@ export const vehicleSchema = z.object({
 
 // Booking schema
 export const bookingSchema = z.object({
-  _id: z.string().optional(), // MongoDB ObjectId as string
-  id: z.string(), // String ID for API responses
+  _id: z.string(), // MongoDB ObjectId as string
+  // id: z.string(), // String ID for API responses
   vehicleId: z.string(),
   fromPincode: z.string().min(1),
   toPincode: z.string().min(1),
@@ -35,13 +35,15 @@ export const reservationSlotSchema = z.object({
 });
 
 // Insert schemas (omit generated fields)
-export const insertVehicleSchema = vehicleSchema.omit({
-  _id: true,
-  id: true,
-}).extend({
-  capacityKg: z.coerce.number().min(1, "Capacity must be at least 1 kg"),
-  tyres: z.coerce.number().min(1, "Must have at least 1 tyre"),
-});
+export const insertVehicleSchema = vehicleSchema
+  .omit({
+    _id: true,
+    id: true,
+  })
+  .extend({
+    capacityKg: z.coerce.number().min(1, "Capacity must be at least 1 kg"),
+    tyres: z.coerce.number().min(1, "Must have at least 1 tyre"),
+  });
 
 export const insertBookingSchema = bookingSchema.omit({
   _id: true,
@@ -54,7 +56,7 @@ export const vehicleSearchSchema = z.object({
   capacityRequired: z.number().min(1),
   fromPincode: z.string().min(1),
   toPincode: z.string().min(1),
-  startTime: z.string().datetime(),
+  startTime: z.coerce.date(),
 });
 
 // Types

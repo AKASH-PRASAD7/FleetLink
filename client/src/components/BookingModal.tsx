@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,7 +27,7 @@ export default function BookingModal({
   onClose,
   vehicle,
   searchParams,
-  onConfirmBooking
+  onConfirmBooking,
 }: BookingModalProps) {
   const [customerId, setCustomerId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,7 +39,7 @@ export default function BookingModal({
     setIsSubmitting(true);
     try {
       const bookingData: InsertBooking = {
-        vehicleId: vehicle.id,
+        vehicleId: vehicle._id,
         fromPincode: searchParams.fromPincode,
         toPincode: searchParams.toPincode,
         startTime: new Date(searchParams.startTime),
@@ -63,7 +69,10 @@ export default function BookingModal({
 
   if (!vehicle || !searchParams) return null;
 
-  const estimatedEndTime = new Date(new Date(searchParams.startTime).getTime() + vehicle.estimatedRideDurationHours * 60 * 60 * 1000);
+  const estimatedEndTime = new Date(
+    new Date(searchParams.startTime).getTime() +
+      vehicle.estimatedRideDurationHours * 60 * 60 * 1000
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -72,14 +81,21 @@ export default function BookingModal({
           <div className="text-center space-y-4">
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto" />
             <DialogHeader>
-              <DialogTitle className="text-green-700" data-testid="text-booking-confirmed">
+              <DialogTitle
+                className="text-green-700"
+                data-testid="text-booking-confirmed"
+              >
                 Booking Confirmed!
               </DialogTitle>
               <DialogDescription>
                 Your vehicle has been successfully booked.
               </DialogDescription>
             </DialogHeader>
-            <Button onClick={handleClose} className="w-full" data-testid="button-close-confirmation">
+            <Button
+              onClick={handleClose}
+              className="w-full"
+              data-testid="button-close-confirmation"
+            >
               Close
             </Button>
           </div>
@@ -102,13 +118,21 @@ export default function BookingModal({
                 <div className="bg-muted/30 rounded-lg p-3 space-y-2">
                   <div className="flex justify-between">
                     <span className="text-sm text-muted-foreground">Name:</span>
-                    <span className="text-sm font-medium" data-testid="text-booking-vehicle-name">
+                    <span
+                      className="text-sm font-medium"
+                      data-testid="text-booking-vehicle-name"
+                    >
                       {vehicle.name}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Capacity:</span>
-                    <Badge variant="secondary" data-testid="text-booking-capacity">
+                    <span className="text-sm text-muted-foreground">
+                      Capacity:
+                    </span>
+                    <Badge
+                      variant="secondary"
+                      data-testid="text-booking-capacity"
+                    >
                       {vehicle.capacityKg} kg
                     </Badge>
                   </div>
@@ -142,7 +166,10 @@ export default function BookingModal({
                           {estimatedEndTime.toLocaleString()}
                         </span>
                       </div>
-                      <Badge variant="outline" data-testid="text-booking-duration">
+                      <Badge
+                        variant="outline"
+                        data-testid="text-booking-duration"
+                      >
                         {vehicle.estimatedRideDurationHours}h duration
                       </Badge>
                     </div>
@@ -168,7 +195,12 @@ export default function BookingModal({
               </div>
 
               <div className="flex gap-2 pt-4">
-                <Button variant="outline" onClick={handleClose} className="flex-1" data-testid="button-cancel-booking">
+                <Button
+                  variant="outline"
+                  onClick={handleClose}
+                  className="flex-1"
+                  data-testid="button-cancel-booking"
+                >
                   Cancel
                 </Button>
                 <Button

@@ -6,9 +6,9 @@ export default function AddVehiclePage() {
     try {
       // todo: replace with actual API call
       console.log("Adding vehicle:", vehicle);
-      
+
       // Simulate API call
-      const response = await fetch("/api/vehicles", {
+      const response = await fetch("http://localhost:8000/api/v1/vehicles", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
