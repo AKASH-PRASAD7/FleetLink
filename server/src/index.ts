@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express, { type Request, Response, NextFunction } from "express";
-import { Routes } from "../api/routes";
+import Routes from "../api/routes";
 import { setupVite, serveStatic, log } from "../vite";
 import { connectDB } from "server/db/mongo";
 
